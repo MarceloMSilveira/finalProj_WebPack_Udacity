@@ -34,11 +34,17 @@ function askMeaningCloudAPI (userText) {
     };
 
     //My fetch:
-    const response = fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
-    .then(response => response.json())
-    .catch(error => console.log('error', error));
-
-    return response.subjectivity;
+    const response = async () => {
+      await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
+      try {
+        const newData = await response.json()
+        return newData.subjectivity
+      }
+      catch(error){
+        console.log('error', error)
+      } 
+ 
+    }
 }
 
 app.get('/', function (req, res) {
