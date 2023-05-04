@@ -58,11 +58,11 @@ app.get('/test', function (req, res) {
 
 //post route to recieve text to be analized
 app.post('/dataPost', (req,res)=> {
-  console.log(req.body.userText);
-  let userText = req.body.userText;
+  console.log(req.body.userResp);
+  let userText = req.body.userResp;
   let response = askMeaningCloudAPI(userText);
   console.log(response);
-  res.send = {userText:response};
+  res.send = {APIResp:response};
 })
 
 
