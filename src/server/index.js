@@ -11,8 +11,6 @@ app.use(cors())
 app.use(express.static('dist'))
 
 console.log(__dirname)
-console.log(`Your API key is ${process.env.API_KEY}`);
-const aplication_key = process.env.API_KEY;
 
 //REQUEST TO API
 const formdata = new FormData();
