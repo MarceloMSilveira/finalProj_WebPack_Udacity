@@ -40,7 +40,7 @@ const response = fetch("https://api.meaningcloud.com/sentiment-2.1", requestOpti
 const response = fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
   .then(response => response.json())
   .then(response => 
-        console.log(response.body)
+        console.log(response.subjectivity)
     )
   .catch(error => console.log('error', error));
 
