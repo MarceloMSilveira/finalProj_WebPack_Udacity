@@ -24,7 +24,7 @@ function handleSubmit(event) {
     event.preventDefault()
     // check what text was put into the form field
     let formText = document.getElementById('name').value
-    let res = postData('http://localhost:8051/postData',{'userResp':formText})
+    let res = postData('http://localhost:8051/dataPost',{'userResp':formText})
     .then(document.getElementById('results').innerHTML = res.userResp)
     .catch(error=> console.log("error", error))
 }
