@@ -35,9 +35,8 @@ function askMeaningCloudAPI (userText) {
 
     //My fetch:
     const response = fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
-      .then(response => response.json())
-      .then(response => response.subjectivity)
-      .catch(error => console.log('error', error));
+    .then(response => response.json())
+    .catch(error => console.log('error', error));
 
     return response.subjectivity;
 }
