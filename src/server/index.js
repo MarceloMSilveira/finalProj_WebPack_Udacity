@@ -2,6 +2,8 @@ var path = require('path')
 const express = require('express')
 const cors = require('cors')
 const mockAPIResponse = require('./mockAPI.js')
+const dotenv = require('dotenv');
+dotenv.config();
 
 const app = express()
 app.use(cors())
@@ -9,6 +11,8 @@ app.use(cors())
 app.use(express.static('dist'))
 
 console.log(__dirname)
+console.log(`Your API key is ${process.env.API_KEY}`);
+const aplication_key = process.env.API_KEY;
 
 app.get('/', function (req, res) {
     res.sendFile('dist/index.html')
