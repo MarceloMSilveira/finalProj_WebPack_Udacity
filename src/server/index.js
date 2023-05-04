@@ -1,12 +1,19 @@
 var path = require('path')
 const express = require('express')
 const cors = require('cors')
+const bodyParser = require('body-parser');
 const mockAPIResponse = require('./mockAPI.js')
 const dotenv = require('dotenv');
 dotenv.config();
 
 const app = express()
+
+// Cors for cross origin allowance
 app.use(cors())
+/* Middleware*/
+//Here we are configuring express to use body-parser as middle-ware.
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.use(express.static('dist'))
 
