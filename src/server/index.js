@@ -20,6 +20,7 @@ app.use(express.static('dist'))
 console.log(__dirname)
 
 //REQUEST TO API
+let APIresponse = ''
 
 function askMeaningCloudAPI (userText) {
     const formdata = new FormData();
@@ -34,7 +35,7 @@ function askMeaningCloudAPI (userText) {
     };
 
     const urlMCloud = "https://api.meaningcloud.com/sentiment-2.1"
-    const APIresponse = ''
+    
     //My fetch:
     fetch(urlMCloud, requestOptions)
     .then(resp => resp.json())
