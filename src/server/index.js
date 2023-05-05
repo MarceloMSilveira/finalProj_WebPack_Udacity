@@ -1,3 +1,4 @@
+let projData = {};
 var path = require('path')
 const express = require('express')
 const cors = require('cors')
@@ -41,7 +42,7 @@ function askMeaningCloudAPI (userText) {
     .then(resp => resp.json())
     .then((resp) => {
         console.log(resp.subjectivity)
-        APIresponse = resp.subjectivity
+        projData = {APIresponse : resp.subjectivity}
     })
     .catch(error => console.log('error', error));
 }
@@ -56,8 +57,8 @@ app.listen(8051, function () {
     console.log('Example app listening on port 8051!')
 })
 
-app.get('/test', function (req, res) {
-    res.send(mockAPIResponse)
+app.get('/all', function (req, res) {
+    res.send(projData)
 })
 
 //post route to recieve text to be analized
