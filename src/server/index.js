@@ -33,18 +33,16 @@ function askMeaningCloudAPI (userText) {
       redirect: 'follow'
     };
 
+    const urlMCloud = "https://api.meaningcloud.com/sentiment-2.1"
+    const APIresponse = ''
     //My fetch:
-    const response = async () => {
-      await fetch("https://api.meaningcloud.com/sentiment-2.1", requestOptions)
-      try {
-        const newData = await response.json()
-        return newData.subjectivity
-      }
-      catch(error){
-        console.log('error', error)
-      } 
- 
-    }
+    fetch(urlMCloud, requestOptions)
+    .then(resp => resp.json())
+    .then((resp) => {
+        console.log(resp.subjectivity)
+        APIresponse = resp.subjectivity
+    })
+    .catch(error => console.log('error', error));
 }
 
 app.get('/', function (req, res) {
@@ -65,9 +63,9 @@ app.get('/test', function (req, res) {
 app.post('/dataPost', (req,res)=> {
   console.log(req.body.userResp);
   let userText = req.body.userResp;
-  let response = askMeaningCloudAPI(userText);
-  console.log(response);
-  res.send = {APIResp:response};
+  askMeaningCloudAPI(userText);
+  console.log(APIresponse);
+  res.send = {APIResp:APIresponse};
 })
 
 
