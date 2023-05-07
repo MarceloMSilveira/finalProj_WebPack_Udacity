@@ -43,6 +43,7 @@ function askMeaningCloudAPI (userText) {
     .then((resp) => {
         console.log(resp.subjectivity)
         projData.APIresponse = resp.subjectivity
+        console.log(projData)
     })
     .catch(error => console.log('error', error));
 }

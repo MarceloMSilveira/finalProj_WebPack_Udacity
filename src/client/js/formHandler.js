@@ -8,11 +8,8 @@ function handleSubmit(event) {
     const url = 'http://localhost:8051/dataPost'
     postData(url,{userResp:formText})
     .then ( function (data) {
-        console.log(data)
-        console.log(data.APIResp)
+        upDateUI()
     })
-    .then (function() {upDateUI()})
-    
 }
 
 const postData = async ( url = '', data = {})=>{
@@ -29,7 +26,7 @@ const postData = async ( url = '', data = {})=>{
   
     try {
       const newData = await response.json();
-      console.log(newData.APIResp);
+      console.log(newData.APIresponse);
       return newData;
     }catch(error) {
     console.log("error", error);
@@ -40,7 +37,7 @@ const upDateUI = async () => {
     const response = await fetch ('http://localhost:8051/all');
     try {
         const newData = await response.json();
-        document.getElementById('results').innerHTML = newData.APIResp;
+        document.getElementById('results').innerHTML = newData.APIresponse;
     } catch (error){
         console.log("Error: ", error);
     }
