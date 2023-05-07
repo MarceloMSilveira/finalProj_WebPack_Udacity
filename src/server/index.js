@@ -68,7 +68,7 @@ app.post('/dataPost', (req,res)=> {
   let userText = req.body.userResp;
   askMeaningCloudAPI(userText);
   console.log(APIresponse);
-  res.send = {APIResp:APIresponse};
+  res.send(projData);
 })
 
 
