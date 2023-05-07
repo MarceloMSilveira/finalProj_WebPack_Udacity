@@ -44,6 +44,7 @@ function askMeaningCloudAPI (userText) {
         console.log(resp.subjectivity)
         projData.APIresponse = resp.subjectivity
         console.log(projData)
+        return projData
     })
     .catch(error => console.log('error', error));
 }
@@ -59,16 +60,20 @@ app.listen(8051, function () {
 })
 
 app.get('/all', function (req, res) {
-    res.send(projData)
+  console.log('test')  
+  res.send(projData)
 })
 
 //post route to recieve text to be analized
-app.post('/dataPost', (req,res)=> {
+app.post('/dataPost', async (req,res)=> {
   console.log(req.body.userResp);
   let userText = req.body.userResp;
-  askMeaningCloudAPI(userText);
-  console.log(APIresponse);
-  res.send(projData);
+  const response = await askMeaningCloudAPI(userText);
+  try {
+    console.log(`New: ${response.APIresponse}`);
+    res.send(response);
+  }
+  catch (error) {console.log(error)}
 })
 
 
