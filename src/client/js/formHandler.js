@@ -27,7 +27,7 @@ async function postData ( url = '', data = {}) {
       console.log(newData.agreement);
       return newData;
     }catch(error) {
-    console.log("error", error);
+      console.log("error", error);
     }
   }
 
