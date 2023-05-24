@@ -58,6 +58,7 @@ app.listen(8051, function () {
 })
 
 app.get('/all', function (req, res) {
+    console.log(`Inside get/all: ${projData.agreement}`)
     res.send(projData)
 })
 
