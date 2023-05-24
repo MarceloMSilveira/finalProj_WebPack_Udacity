@@ -67,9 +67,9 @@ app.post('/dataPost', (req,res)=> {
   let userText = req.body.userResp
   askMeaningCloudAPI(userText)
   .then (
-    (resp) => {
-      console.log(`inside then of dataPost: ${resp.subjectivity}`)
-      res.send(resp.subjectivity)
+    (data) => {
+      console.log(`inside then of dataPost: ${data.subjectivity}`)
+      res.send(data.subjectivity)
     }
   )
 })
