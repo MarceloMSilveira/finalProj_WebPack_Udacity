@@ -23,7 +23,7 @@ console.log(__dirname)
 //REQUEST TO API
 let APIresponse = ''
 
-function askMeaningCloudAPI (userText) {
+async function askMeaningCloudAPI (userText) {
     const formdata = new FormData();
     formdata.append("key", process.env.API_KEY);
     formdata.append("txt", userText);
@@ -41,9 +41,8 @@ function askMeaningCloudAPI (userText) {
     fetch(urlMCloud, requestOptions)
     .then(resp => resp.json())
     .then((resp) => {
-        console.log(resp.subjectivity)
-        projData.APIresponse = resp.subjectivity
-        console.log(projData)
+        projData = resp
+        return projData
     })
     .catch(error => console.log('error', error));
 }
@@ -64,11 +63,15 @@ app.get('/all', function (req, res) {
 
 //post route to recieve text to be analized
 app.post('/dataPost', (req,res)=> {
-  console.log(req.body.userResp);
-  let userText = req.body.userResp;
-  askMeaningCloudAPI(userText);
-  console.log(APIresponse);
-  res.send(projData);
+  console.log(req.body.userResp)
+  let userText = req.body.userResp
+  askMeaningCloudAPI(userText)
+  .then (
+    (resp) => {
+      console.log(`inside then of dataPost: ${resp.subjectivity}`)
+      res.send(resp.subjectivity)
+    }
+  )
 })
 
 
