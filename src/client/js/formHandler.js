@@ -35,8 +35,8 @@ async function upDateUI() {
     const response = await fetch ('http://localhost:8051/all');
     try {
         const newData = await response.json()
-        console.log(`inside upDateUI: ${newData.APIresponse}`)
-        document.getElementById('results').innerHTML = newData.APIresponse
+        console.log(`inside upDateUI: ${newData.agreement}`)
+        document.getElementById('results').innerHTML = newData.agreement
         return response
     } catch (error){
         console.log("Error: ", error);
