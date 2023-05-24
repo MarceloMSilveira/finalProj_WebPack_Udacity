@@ -24,7 +24,7 @@ async function postData ( url = '', data = {}) {
   
     try {
       const newData = await response.json();
-      console.log(newData.APIresponse);
+      console.log(newData.agreement);
       return newData;
     }catch(error) {
     console.log("error", error);
