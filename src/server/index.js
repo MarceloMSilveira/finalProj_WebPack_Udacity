@@ -20,10 +20,7 @@ app.use(express.static('dist'))
 
 console.log(__dirname)
 
-//REQUEST TO API
-let APIresponse = ''
-
-function askMeaningCloudAPI (userText) {
+async function askMeaningCloudAPI (userText) {
     const formdata = new FormData();
     formdata.append("key", process.env.API_KEY);
     formdata.append("txt", userText);
@@ -38,15 +35,16 @@ function askMeaningCloudAPI (userText) {
     const urlMCloud = "https://api.meaningcloud.com/sentiment-2.1"
     
     //My fetch:
-    fetch(urlMCloud, requestOptions)
-    .then(resp => resp.json())
-    .then((resp) => {
-        console.log(resp.subjectivity)
-        projData.APIresponse = resp.subjectivity
-        console.log(projData)
-        return projData
-    })
-    .catch(error => console.log('error', error));
+    const resp = await fetch(urlMCloud, requestOptions)
+    
+    try {
+      const newData = await resp.json()
+      projData = newData
+      return newData
+    } catch (error) {
+      error => console.log('error', error)
+    }
+        
 }
 
 app.get('/', function (req, res) {
@@ -56,24 +54,25 @@ app.get('/', function (req, res) {
 
 // designates what port the app will listen to for incoming requests
 app.listen(8051, function () {
-    console.log('Example app listening on port 8051!')
+    console.log('Listening on port 8051!')
 })
 
 app.get('/all', function (req, res) {
-  console.log('test')  
-  res.send(projData)
+    console.log(`Inside get/all: ${projData.agreement}`)
+    res.send(projData)
 })
 
 //post route to recieve text to be analized
-app.post('/dataPost', async (req,res)=> {
-  console.log(req.body.userResp);
-  let userText = req.body.userResp;
-  const response = await askMeaningCloudAPI(userText);
-  try {
-    console.log(`New: ${response.APIresponse}`);
-    res.send(response);
-  }
-  catch (error) {console.log(error)}
+app.post('/dataPost', (req,res)=> {
+  console.log(req.body.userResp)
+  let userText = req.body.userResp
+  askMeaningCloudAPI(userText)
+  .then (
+    (data) => {
+      console.log(`in dataPost: ${data.subjectivity}`)
+      res.send(data)
+    }
+  )
 })
 
 

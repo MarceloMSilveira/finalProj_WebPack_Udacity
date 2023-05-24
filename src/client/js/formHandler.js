@@ -7,12 +7,10 @@ function handleSubmit(event) {
     let formText = document.getElementById('name').value
     const url = 'http://localhost:8051/dataPost'
     postData(url,{userResp:formText})
-    .then ( function (data) {
-        upDateUI()
-    })
+    .then ( () =>  upDateUI() )
 }
 
-const postData = async ( url = '', data = {})=>{
+async function postData ( url = '', data = {}) {
     console.log(data);
     const response = await fetch(url, {
     method: 'POST', 
@@ -21,23 +19,25 @@ const postData = async ( url = '', data = {})=>{
         'Content-Type': 'application/json',
     },
    // Body data type must match "Content-Type" header        
-    body: JSON.stringify(data), 
-  });
+    body: JSON.stringify(data) 
+  })
   
     try {
       const newData = await response.json();
-      console.log(newData.APIresponse);
+      console.log(newData.agreement);
       return newData;
     }catch(error) {
-    console.log("error", error);
+      console.log("error", error);
     }
-  };
+  }
 
-const upDateUI = async () => {
+async function upDateUI() {
     const response = await fetch ('http://localhost:8051/all');
     try {
-        const newData = await response.json();
-        document.getElementById('results').innerHTML = newData.APIresponse;
+        const newData = await response.json()
+        console.log(`inside upDateUI: ${newData.agreement}`)
+        document.getElementById('results').innerHTML = newData.sentence_list[0].text
+        return response
     } catch (error){
         console.log("Error: ", error);
     }
