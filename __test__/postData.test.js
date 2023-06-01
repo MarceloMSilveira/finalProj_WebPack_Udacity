@@ -5,8 +5,8 @@ import { postData } from "../src/client";
 
 describe("Testing the asyncFunction functionality", () => {
     test("Testing the postData() function", () => {
-      return postData(url,data).then((result) => {
-        expect(result.subjectivity).toBe('OBJECTIVE');
-      });
+        return postData(url,data).then((result) => {
+            expect(result.subjectivity).toBe('OBJECTIVE');
+        });
     });
-  });
+});
