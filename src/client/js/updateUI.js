@@ -3,8 +3,8 @@ async function upDateUI() {
     try {
         const newData = await response.json()
         console.log(`inside upDateUI: ${newData.agreement}`)
-        //document.getElementById('results').innerHTML = `Text extract:: ${newData.sentence_list[0].text}`
-        //document.getElementById('subjectivity').innerHTML = `Subjectivity: ${newData.subjectivity}`
+        document.getElementById('results').innerHTML = `Text extract:: ${newData.sentence_list[0].text}`
+        document.getElementById('subjectivity').innerHTML = `Subjectivity: ${newData.subjectivity}`
         return newData
     } catch (error){
         console.log("Error: ", error);
