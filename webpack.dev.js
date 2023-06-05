@@ -12,6 +12,11 @@ module.exports = {
     mode: 'development',
     devtool: 'source-map',
     stats: 'verbose',
+    resolve: {
+        fallback: {
+          buffer: require.resolve('buffer/'),
+        },
+    },
     module: {
         rules: [
             {
