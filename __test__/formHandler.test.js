@@ -4,19 +4,18 @@ import { JSDOM } from 'jsdom';
 
 global.TextEncoder = TextEncoder;
 
-// Mock do objeto de evento
+// Mock the Client object
+jest.mock('./Client', () => ({
+    postData: jest.fn(),
+    upDateUI: jest.fn(),
+  }));
 
 test('Testing the handleSubmit function', () => {
     // Defina a entrada para a função
     const event = {
       preventDefault: jest.fn(),
     };
-
-    const Client = {
-      postData: jest.fn(),
-      upDateUI: jest.fn()
-    }
-    
+  
     const formText = 'I LOVE YOU';
 
     /*const dom = new JSDOM('<!doctype html><html><body><input type="hidden" id="name" value="test"></body></html>');
