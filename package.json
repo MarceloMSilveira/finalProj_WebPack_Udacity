@@ -52,7 +52,7 @@
     "text-encoding-utf-8": "^1.0.2",
     "webpack-cli": "^5.0.2",
     "webpack-dev-server": "^4.13.3",
-    "workbox-webpack-plugin": "^6.5.4",
+    "workbox-webpack-plugin": "^6.6.0",
     "worker-thread": "^1.1.0"
   }
 }
