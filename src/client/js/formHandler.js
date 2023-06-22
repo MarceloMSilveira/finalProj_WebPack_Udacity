@@ -20,30 +20,4 @@ const checkURL = (text) => {
     return regexp.test(text);
 };
 
-const describePolarityScore = (score) => {
-    let polarity = '';
-    switch (score) {
-      case 'P+':
-        polarity = 'Strong Positive';
-        break;
-      case 'P':
-        polarity = 'Positive';
-        break;
-      case 'NEU':
-        polarity = 'Neutral';
-        break;
-      case 'N':
-        polarity = 'Negative';
-        break;
-      case 'N+':
-        polarity = 'Strong Negative';
-        break;
-      case 'NONE':
-        polarity = 'None';
-        break;
-    }
-  
-    return polarity;
-};
-
 export { handleSubmit }
