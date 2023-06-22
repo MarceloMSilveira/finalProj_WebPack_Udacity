@@ -20,11 +20,11 @@ app.use(express.static('dist'))
 
 console.log(__dirname)
 
-async function askMeaningCloudAPI (userText) {
+async function askMeaningCloudAPI (user_URL) {
     const formdata = new FormData();
     formdata.append("key", process.env.API_KEY);
-    formdata.append("txt", userText);
-    formdata.append("lang", "es");  // 2-letter code, like en es fr ...
+    formdata.append("url", user_URL);
+    formdata.append("lang", "en");  // 2-letter code, like en es fr ...
 
     const requestOptions = {
       method: 'POST',
@@ -65,8 +65,8 @@ app.get('/all', function (req, res) {
 //post route to recieve text to be analized
 app.post('/dataPost', (req,res)=> {
   console.log(req.body.userResp)
-  let userText = req.body.userResp
-  askMeaningCloudAPI(userText)
+  let user_URL = req.body.userResp
+  askMeaningCloudAPI(user_URL)
   .then (
     (data) => {
       console.log(`in dataPost: ${data.subjectivity}`)

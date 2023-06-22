@@ -1,11 +1,66 @@
 
 function handleSubmit(event) {
     event.preventDefault()
-    // check what text was put into the form field
-    let formText = document.getElementById('name').value
     const url = 'http://localhost:8051/dataPost'
-    Client.postData(url,{userResp:formText})
-    .then ( () =>  Client.upDateUI() )
+    let user_URL = document.getElementById('user_URL').value
+    
+    // check what text was put into the form field
+    if (checkURL(user_URL)) {
+        Client.postData(url,{userResp:user_URL})
+        .then ( () =>  Client.upDateUI() )
+    } else {
+        displayResults(null);
+    }    
+
+    
+    
 }
+
+const checkURL = (text) => {
+    const regexp = /^(http|https):\/\/[^ "]+$/;
+    return regexp.test(text);
+};
+
+const displayResults = (data) => {
+    if (data) {
+      results.innerHTML = `
+      <div id="polarity">Polarity: ${describePolarityScore(data.score_tag)}</div>
+      <div id="agreement">Agreement: ${data.agreement}</div>
+      <div id="subjectivity">Subjectivity: ${data.subjectivity}</div>
+      <div id="confidence">Confidence: ${data.confidence}</div>
+      <div id="irony">Irony: ${data.irony}</div>
+      `;
+    } else {
+      results.innerHTML = `
+          <div id="error">⛔ It seems like the URL you entered is invalid. Please check the URL and try again ⛔</div>
+      `;
+    }
+};
+  
+const describePolarityScore = (score) => {
+    let polarity = '';
+    switch (score) {
+      case 'P+':
+        polarity = 'Strong Positive';
+        break;
+      case 'P':
+        polarity = 'Positive';
+        break;
+      case 'NEU':
+        polarity = 'Neutral';
+        break;
+      case 'N':
+        polarity = 'Negative';
+        break;
+      case 'N+':
+        polarity = 'Strong Negative';
+        break;
+      case 'NONE':
+        polarity = 'None';
+        break;
+    }
+  
+    return polarity;
+};
 
 export { handleSubmit }
