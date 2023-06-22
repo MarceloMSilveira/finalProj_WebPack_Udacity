@@ -24,7 +24,7 @@ async function askMeaningCloudAPI (user_URL) {
     const formdata = new FormData();
     formdata.append("key", process.env.API_KEY);
     formdata.append("url", user_URL);
-    formdata.append("lang", "en");  // 2-letter code, like en es fr ...
+    formdata.append("lang", "auto"); 
 
     const requestOptions = {
       method: 'POST',

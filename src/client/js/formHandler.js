@@ -9,7 +9,9 @@ function handleSubmit(event) {
         Client.postData(url,{userResp:user_URL})
         .then ( () =>  Client.upDateUI() )
     } else {
-        displayResults(null);
+        document.getElementById('results').innerHTML = `I see here that the URL entered is not valid. Please try again.`;
+        document.getElementById('subjectivity').innerHTML = ``
+        document.getElementById('polarity').innerHTML = ``
     }    
 }
 
@@ -18,20 +20,6 @@ const checkURL = (text) => {
     return regexp.test(text);
 };
 
-const displayResults = (data) => {
-    if (data) {
-      results.innerHTML = `
-      <div id="polarity">Polarity: ${describePolarityScore(data.score_tag)}</div>
-      <div id="agreement">Agreement: ${data.agreement}</div>
-      <div id="subjectivity">Subjectivity: ${data.subjectivity}</div>
-      <div id="confidence">Confidence: ${data.confidence}</div>
-      <div id="irony">Irony: ${data.irony}</div>
-      `;
-    } else {
-        document.getElementById('results').innerHTML = `I see here that the URL entered is not valid. Please try again..`
-    }
-};
-  
 const describePolarityScore = (score) => {
     let polarity = '';
     switch (score) {
