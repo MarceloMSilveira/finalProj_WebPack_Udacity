@@ -29,16 +29,18 @@
         <main>
             <section class="inputUser">
                 <form class="" >
-                    <p>Insert your text to analysis:</p>
-                    <input id="name" type="text" name="input" value="" placeholder="Enter your text here">
+                    <p>Insert a article's URL to see the sentimental analysis:</p>
+                    <input id="name" type="text" name="input" value="" placeholder="Enter your URL here">
                     <input type="submit" name="" value="submit" onclick="return Client.handleSubmit(event)" onsubmit="return Client.handleSubmit(event)">
                 </form>
             </section>
 
             <section class="analysis">
-                <strong>Results from Meaning Cloud:</strong>
+                <strong>Sentimental Analysis result from Meaning Cloud:</strong>
                 <div id="results">Text extract:</div>
                 <div id="subjectivity">Subjectivity: </div>
+                <div id="polarity">Polarity: </div>
+
             </section>
         </main>
 
