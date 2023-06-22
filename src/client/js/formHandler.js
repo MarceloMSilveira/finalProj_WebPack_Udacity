@@ -11,9 +11,6 @@ function handleSubmit(event) {
     } else {
         displayResults(null);
     }    
-
-    
-    
 }
 
 const checkURL = (text) => {
@@ -31,9 +28,7 @@ const displayResults = (data) => {
       <div id="irony">Irony: ${data.irony}</div>
       `;
     } else {
-      results.innerHTML = `
-          <div id="error">⛔ It seems like the URL you entered is invalid. Please check the URL and try again ⛔</div>
-      `;
+        document.getElementById('results').innerHTML = `I see here that the URL entered is not valid. Please try again..`
     }
 };
   
